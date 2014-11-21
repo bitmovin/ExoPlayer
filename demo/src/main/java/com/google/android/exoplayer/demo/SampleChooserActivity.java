@@ -50,6 +50,8 @@ public class SampleChooserActivity extends Activity {
 
     sampleAdapter.add(new Header("Simple player"));
     sampleAdapter.addAll((Object[]) Samples.SIMPLE);
+    sampleAdapter.add(new Header("bitmovin DASH"));
+    sampleAdapter.addAll((Object[]) Samples.bitmovin_DASH);
     sampleAdapter.add(new Header("YouTube DASH"));
     sampleAdapter.addAll((Object[]) Samples.YOUTUBE_DASH_MP4);
     sampleAdapter.add(new Header("Widevine GTS DASH"));
