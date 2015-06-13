@@ -31,7 +31,7 @@ import com.google.android.exoplayer.demo.player.DemoPlayer.RendererBuilderCallba
 import com.google.android.exoplayer.drm.DrmSessionManager;
 import com.google.android.exoplayer.drm.MediaDrmCallback;
 import com.google.android.exoplayer.drm.StreamingDrmSessionManager;
-import com.google.android.exoplayer.drm.UnsupportedDrmException;
+import com.google.android.exoplayer.exceptions.UnsupportedDrmException;
 import com.google.android.exoplayer.exceptions.DecoderQueryException;
 import com.google.android.exoplayer.smoothstreaming.SmoothStreamingChunkSource;
 import com.google.android.exoplayer.smoothstreaming.SmoothStreamingManifest;

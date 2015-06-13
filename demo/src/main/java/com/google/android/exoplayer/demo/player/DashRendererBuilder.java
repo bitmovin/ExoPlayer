@@ -48,7 +48,7 @@ import com.google.android.exoplayer.demo.player.DemoPlayer.RendererBuilder;
 import com.google.android.exoplayer.demo.player.DemoPlayer.RendererBuilderCallback;
 import com.google.android.exoplayer.drm.MediaDrmCallback;
 import com.google.android.exoplayer.drm.StreamingDrmSessionManager;
-import com.google.android.exoplayer.drm.UnsupportedDrmException;
+import com.google.android.exoplayer.exceptions.UnsupportedDrmException;
 import com.google.android.exoplayer.exceptions.DecoderQueryException;
 import com.google.android.exoplayer.text.TextTrackRenderer;
 import com.google.android.exoplayer.text.ttml.TtmlParser;

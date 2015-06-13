@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.android.exoplayer.drm;
+package com.google.android.exoplayer.exceptions;
 
 /**
  * Thrown when the drm keys loaded into an open session expire.

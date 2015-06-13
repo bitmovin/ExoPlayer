@@ -31,6 +31,9 @@ import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 
+import com.google.android.exoplayer.exceptions.KeysExpiredException;
+import com.google.android.exoplayer.exceptions.UnsupportedDrmException;
+
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -110,7 +113,7 @@ public class StreamingDrmSessionManager implements DrmSessionManager {
    * @param eventHandler A handler to use when delivering events to {@code eventListener}. May be
    *     null if delivery of events is not required.
    * @param eventListener A listener of events. May be null if delivery of events is not required.
-   * @throws UnsupportedDrmException If the specified DRM scheme is not supported.
+   * @throws com.google.android.exoplayer.exceptions.UnsupportedDrmException If the specified DRM scheme is not supported.
    */
   public static StreamingDrmSessionManager newWidevineInstance(Looper playbackLooper,
       MediaDrmCallback callback, HashMap<String, String> optionalKeyRequestParameters,
