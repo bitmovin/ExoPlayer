@@ -17,7 +17,6 @@ package com.google.android.exoplayer;
 
 import android.annotation.TargetApi;
 import android.media.MediaCodec;
-import android.media.MediaCodec.CodecException;
 import android.media.MediaCodec.CryptoException;
 import android.media.MediaCrypto;
 import android.os.Handler;
@@ -26,6 +25,7 @@ import android.os.SystemClock;
 import com.google.android.exoplayer.SampleSource.SampleSourceReader;
 import com.google.android.exoplayer.drm.DrmInitData;
 import com.google.android.exoplayer.drm.DrmSessionManager;
+import com.google.android.exoplayer.exceptions.DecoderInitializationException;
 import com.google.android.exoplayer.exceptions.DecoderQueryException;
 import com.google.android.exoplayer.exceptions.ExoPlaybackException;
 import com.google.android.exoplayer.util.Assertions;
@@ -72,53 +72,6 @@ public abstract class MediaCodecTrackRenderer extends TrackRenderer {
      */
     void onDecoderInitialized(String decoderName, long elapsedRealtimeMs,
         long initializationDurationMs);
-
-  }
-
-  /**
-   * Thrown when a failure occurs instantiating a decoder.
-   */
-  public static class DecoderInitializationException extends Exception {
-
-    private static final int CUSTOM_ERROR_CODE_BASE = -50000;
-    private static final int NO_SUITABLE_DECODER_ERROR = CUSTOM_ERROR_CODE_BASE + 1;
-    private static final int DECODER_QUERY_ERROR = CUSTOM_ERROR_CODE_BASE + 2;
-
-    /**
-     * The name of the decoder that failed to initialize. Null if no suitable decoder was found.
-     */
-    public final String decoderName;
-
-    /**
-     * An optional developer-readable diagnostic information string. May be null.
-     */
-    public final String diagnosticInfo;
-
-    public DecoderInitializationException(MediaFormat mediaFormat, Throwable cause, int errorCode) {
-      super("Decoder init failed: [" + errorCode + "], " + mediaFormat, cause);
-      this.decoderName = null;
-      this.diagnosticInfo = buildCustomDiagnosticInfo(errorCode);
-    }
-
-    public DecoderInitializationException(MediaFormat mediaFormat, Throwable cause,
-        String decoderName) {
-      super("Decoder init failed: " + decoderName + ", " + mediaFormat, cause);
-      this.decoderName = decoderName;
-      this.diagnosticInfo = Util.SDK_INT >= 21 ? getDiagnosticInfoV21(cause) : null;
-    }
-
-    @TargetApi(21)
-    private static String getDiagnosticInfoV21(Throwable cause) {
-      if (cause instanceof CodecException) {
-        return ((CodecException) cause).getDiagnosticInfo();
-      }
-      return null;
-    }
-
-    private static String buildCustomDiagnosticInfo(int errorCode) {
-      String sign = errorCode < 0 ? "neg_" : "";
-      return "com.google.android.exoplayer.MediaCodecTrackRenderer_" + sign + Math.abs(errorCode);
-    }
 
   }
 

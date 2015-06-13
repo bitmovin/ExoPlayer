@@ -22,12 +22,12 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 
-import com.google.android.exoplayer.exceptions.ExoPlaybackException;
 import com.google.android.exoplayer.MediaFormatHolder;
 import com.google.android.exoplayer.SampleHolder;
 import com.google.android.exoplayer.SampleSource;
 import com.google.android.exoplayer.SampleSource.SampleSourceReader;
 import com.google.android.exoplayer.TrackRenderer;
+import com.google.android.exoplayer.exceptions.ExoPlaybackException;
 import com.google.android.exoplayer.util.Assertions;
 
 import java.io.IOException;

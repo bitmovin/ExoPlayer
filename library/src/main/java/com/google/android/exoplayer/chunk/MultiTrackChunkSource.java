@@ -15,10 +15,10 @@
  */
 package com.google.android.exoplayer.chunk;
 
-import com.google.android.exoplayer.exceptions.ExoPlaybackException;
 import com.google.android.exoplayer.ExoPlayer.ExoPlayerComponent;
 import com.google.android.exoplayer.MediaFormat;
 import com.google.android.exoplayer.TrackInfo;
+import com.google.android.exoplayer.exceptions.ExoPlaybackException;
 import com.google.android.exoplayer.util.Assertions;
 
 import java.io.IOException;
