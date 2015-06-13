@@ -16,11 +16,18 @@
 package com.google.android.exoplayer.dash.mpd;
 
 import android.net.Uri;
+import android.text.TextUtils;
 
 import com.google.android.exoplayer.chunk.Format;
 import com.google.android.exoplayer.chunk.FormatWrapper;
 import com.google.android.exoplayer.dash.DashSegmentIndex;
 import com.google.android.exoplayer.dash.DashSingleSegmentIndex;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.regex.Matcher;
 
 /**
  * A DASH representation.
@@ -89,6 +96,12 @@ public abstract class Representation implements FormatWrapper {
     }
   }
 
+  public static Representation newInstance(XmlPullParser xpp, String baseUrl, long periodStartMs, long periodDurationMs, String mimeType, String language,
+                                           SegmentBase segmentBase, ContentProtectionsBuilder contentProtectionsBuilder, String contentId)
+         throws XmlPullParserException, IOException {
+    return parse(xpp, baseUrl, periodStartMs, periodDurationMs, mimeType, language, segmentBase, contentProtectionsBuilder, contentId);
+  }
+
   protected Representation(long periodStartMs, long periodDurationMs, String contentId, long revisionId, Format format, SegmentBase segmentBase) {
     this.periodStartMs = periodStartMs;
     this.periodDurationMs = periodDurationMs;
@@ -140,4 +153,66 @@ public abstract class Representation implements FormatWrapper {
     return contentId + "." + format.id + "." + revisionId;
   }
 
+  protected static Representation parse(XmlPullParser xpp, String baseUrl,
+                                               long periodStartMs, long periodDurationMs, String mimeType, String language,
+                                               SegmentBase segmentBase, ContentProtectionsBuilder contentProtectionsBuilder, String contentId)
+      throws XmlPullParserException, IOException {
+    String id = xpp.getAttributeValue(null, "id");
+    int bandwidth = MediaPresentationDescriptionParser.parseInt(xpp, "bandwidth");
+    int audioSamplingRate = MediaPresentationDescriptionParser.parseInt(xpp, "audioSamplingRate");
+    int width = MediaPresentationDescriptionParser.parseInt(xpp, "width");
+    int height = MediaPresentationDescriptionParser.parseInt(xpp, "height");
+
+    float frameRate = -1;
+    String frameRateAttribute = xpp.getAttributeValue(null, "frameRate");
+    if (frameRateAttribute != null) {
+      Matcher frameRateMatcher = MediaPresentationDescriptionParser.FRAME_RATE_PATTERN.matcher(frameRateAttribute);
+      if (frameRateMatcher.matches()) {
+        int numerator = Integer.parseInt(frameRateMatcher.group(1));
+        String denominatorString = frameRateMatcher.group(2);
+        if (!TextUtils.isEmpty(denominatorString)) {
+          frameRate = (float) numerator / Integer.parseInt(denominatorString);
+        } else {
+          frameRate = numerator;
+        }
+      }
+    }
+
+    mimeType = MediaPresentationDescriptionParser.parseString(xpp, "mimeType", mimeType);
+    String codecs = MediaPresentationDescriptionParser.parseString(xpp, "codecs", null);
+
+    int numChannels = -1;
+    do {
+      xpp.next();
+      if (MediaPresentationDescriptionParser.isStartTag(xpp, "BaseURL")) {
+        baseUrl = MediaPresentationDescriptionParser.parseBaseUrl(xpp, baseUrl);
+      } else if (MediaPresentationDescriptionParser.isStartTag(xpp, "AudioChannelConfiguration")) {
+        numChannels = Integer.parseInt(xpp.getAttributeValue(null, "value"));
+      } else if (MediaPresentationDescriptionParser.isStartTag(xpp, "SegmentBase") ||
+                 MediaPresentationDescriptionParser.isStartTag(xpp, "SegmentList") ||
+                 MediaPresentationDescriptionParser.isStartTag(xpp, "SegmentTemplate")) {
+        segmentBase = SegmentList.createInstanceFromXML(xpp, baseUrl, segmentBase, periodDurationMs);
+      } else if (MediaPresentationDescriptionParser.isStartTag(xpp, "ContentProtection")) {
+        contentProtectionsBuilder.addRepresentationProtection(new ContentProtection(xpp));
+      }
+    } while (!MediaPresentationDescriptionParser.isEndTag(xpp, "Representation"));
+
+    Format format = buildFormat(id, mimeType, width, height, frameRate, numChannels,
+        audioSamplingRate, bandwidth, language, codecs);
+
+    return buildRepresentation(periodStartMs, periodDurationMs, contentId, -1, format,
+        segmentBase != null ? segmentBase : new SingleSegmentBase(baseUrl));
+  }
+
+  protected static Format buildFormat(String id, String mimeType, int width, int height, float frameRate,
+                               int numChannels, int audioSamplingRate, int bandwidth, String language, String codecs) {
+    return new Format(id, mimeType, width, height, frameRate, numChannels, audioSamplingRate,
+        bandwidth, language, codecs);
+  }
+
+  protected static Representation buildRepresentation(long periodStartMs, long periodDurationMs,
+                                               String contentId, int revisionId, Format format, SegmentBase segmentBase) {
+    return Representation.newInstance(periodStartMs, periodDurationMs, contentId, revisionId,
+        format, segmentBase);
+  }
 }

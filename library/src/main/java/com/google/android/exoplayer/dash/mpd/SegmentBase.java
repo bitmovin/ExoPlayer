@@ -18,10 +18,18 @@ package com.google.android.exoplayer.dash.mpd;
 import com.google.android.exoplayer.C;
 import com.google.android.exoplayer.util.Util;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+
 /**
  * An approximate representation of a SegmentBase manifest element.
  */
 public abstract class SegmentBase {
+  public static final String TYPE_SEGMENT_BASE = "SegmentBase";
+  public static final String TYPE_SEGMENT_LIST = "SegmentList";
+  public static final String TYPE_SEGMENT_TEMPLATE = "SegmentTemplate";
 
   /* package */ final RangedUri initialization;
   /* package */ final long timescale;
@@ -58,6 +66,24 @@ public abstract class SegmentBase {
    */
   public long getPresentationTimeOffsetUs() {
     return Util.scaleLargeTimestamp(presentationTimeOffset, C.MICROS_PER_SECOND, timescale);
+  }
+
+  public static SegmentBase createInstanceFromXML(
+      XmlPullParser xpp, String baseUrl, SegmentBase parent, long periodDurationMs)
+      throws XmlPullParserException, IOException {
+    SegmentBase segBase;
+
+    if (MediaPresentationDescriptionParser.isStartTag(xpp, TYPE_SEGMENT_BASE)) {
+      segBase = SingleSegmentBase.createInstanceFromXML(xpp, baseUrl, (SingleSegmentBase) parent);
+    } else if (MediaPresentationDescriptionParser.isStartTag(xpp, TYPE_SEGMENT_LIST)) {
+      segBase = SegmentList.createInstanceFromXML(xpp, baseUrl, (SegmentList)parent, periodDurationMs);
+    } else if (MediaPresentationDescriptionParser.isStartTag(xpp, TYPE_SEGMENT_TEMPLATE)) {
+      segBase = SegmentTemplate.createInstanceFromXML(xpp, baseUrl, (SegmentTemplate)parent, periodDurationMs);
+    } else {
+      segBase = null;
+    }
+
+    return segBase;
   }
 
 }

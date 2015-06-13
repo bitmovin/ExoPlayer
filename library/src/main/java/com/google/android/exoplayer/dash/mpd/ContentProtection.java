@@ -15,9 +15,16 @@
  */
 package com.google.android.exoplayer.dash.mpd;
 
+import android.util.Base64;
+
 import com.google.android.exoplayer.util.Assertions;
+import com.google.android.exoplayer.util.ParsableByteArray;
 import com.google.android.exoplayer.util.Util;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -29,17 +36,17 @@ public class ContentProtection {
   /**
    * Identifies the content protection scheme.
    */
-  public final String schemeUriId;
+  public String schemeUriId;
 
   /**
    * The UUID of the protection scheme. May be null.
    */
-  public final UUID uuid;
+  public UUID uuid;
 
   /**
    * Protection scheme specific data. May be null.
    */
-  public final byte[] data;
+  public byte[] data;
 
   /**
    * @param schemeUriId Identifies the content protection scheme.
@@ -47,6 +54,14 @@ public class ContentProtection {
    * @param data Protection scheme specific initialization data. May be null.
    */
   public ContentProtection(String schemeUriId, UUID uuid, byte[] data) {
+    init(schemeUriId, uuid, data);
+  }
+
+  public ContentProtection(XmlPullParser xpp) throws XmlPullParserException, IOException {
+    parseContentProtection(xpp);
+  }
+
+  private void init(String schemeUriId, UUID uuid, byte[] data) {
     this.schemeUriId = Assertions.checkNotNull(schemeUriId);
     this.uuid = uuid;
     this.data = data;
@@ -79,6 +94,34 @@ public class ContentProtection {
       hashCode = hashCode * 37 + Arrays.hashCode(data);
     }
     return hashCode;
+  }
+
+  /**
+   * Parses a ContentProtection element.
+   *
+   * @throws org.xmlpull.v1.XmlPullParserException If an error occurs parsing the element.
+   * @throws java.io.IOException If an error occurs reading the element.
+   **/
+  protected void parseContentProtection(XmlPullParser xpp)
+      throws XmlPullParserException, IOException {
+    String schemeIdUri = xpp.getAttributeValue(null, "schemeIdUri");
+    UUID uuid = null;
+    byte[] data = null;
+    do {
+      xpp.next();
+      // The cenc:pssh element is defined in 23001-7:2015
+      if (MediaPresentationDescriptionParser.isStartTag(xpp, "cenc:pssh") && xpp.next() == XmlPullParser.TEXT) {
+        byte[] decodedData = Base64.decode(xpp.getText(), Base64.DEFAULT);
+        ParsableByteArray psshAtom = new ParsableByteArray(decodedData);
+        psshAtom.skipBytes(12);
+        uuid = new UUID(psshAtom.readLong(), psshAtom.readLong());
+        int dataSize = psshAtom.readInt();
+        data = new byte[dataSize];
+        psshAtom.readBytes(data, 0, dataSize);
+      }
+    } while (!MediaPresentationDescriptionParser.isEndTag(xpp, "ContentProtection"));
+
+    init(schemeIdUri, uuid, data);
   }
 
 }

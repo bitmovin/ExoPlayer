@@ -3,6 +3,10 @@ package com.google.android.exoplayer.dash.mpd;
 import com.google.android.exoplayer.dash.DashSegmentIndex;
 import com.google.android.exoplayer.util.Util;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -83,4 +87,54 @@ public class SegmentTemplate extends MultiSegmentBase {
         }
     }
 
+  public static SegmentTemplate createInstanceFromXML(XmlPullParser xpp, String baseUrl,
+                                                 SegmentTemplate parent, long periodDurationMs) throws XmlPullParserException, IOException {
+
+    long timescale = MediaPresentationDescriptionParser.parseLong(xpp, "timescale", parent != null ? parent.timescale : 1);
+    long presentationTimeOffset = MediaPresentationDescriptionParser.parseLong(xpp, "presentationTimeOffset",
+        parent != null ? parent.presentationTimeOffset : 0);
+    long duration = MediaPresentationDescriptionParser.parseLong(xpp, "duration", parent != null ? parent.duration : -1);
+    int startNumber = MediaPresentationDescriptionParser.parseInt(xpp, "startNumber", parent != null ? parent.startNumber : 1);
+    UrlTemplate mediaTemplate = parseUrlTemplate(xpp, "media",
+        parent != null ? parent.mediaTemplate : null);
+    UrlTemplate initializationTemplate = parseUrlTemplate(xpp, "initialization",
+        parent != null ? parent.initializationTemplate : null);
+
+    RangedUri initialization = null;
+    List<SegmentTimelineElement> timeline = null;
+
+    do {
+      xpp.next();
+      if (MediaPresentationDescriptionParser.isStartTag(xpp, "Initialization")) {
+        initialization = MediaPresentationDescriptionParser.parseInitialization(xpp, baseUrl);
+      } else if (MediaPresentationDescriptionParser.isStartTag(xpp, "SegmentTimeline")) {
+        timeline = MediaPresentationDescriptionParser.parseSegmentTimeline(xpp);
+      }
+    } while (!MediaPresentationDescriptionParser.isEndTag(xpp, "SegmentTemplate"));
+
+    if (parent != null) {
+      initialization = initialization != null ? initialization : parent.initialization;
+      timeline = timeline != null ? timeline : parent.segmentTimeline;
+    }
+
+    return buildSegmentTemplate(initialization, timescale, presentationTimeOffset, periodDurationMs,
+        startNumber, duration, timeline, initializationTemplate, mediaTemplate, baseUrl);
+  }
+
+  protected static SegmentTemplate buildSegmentTemplate(RangedUri initialization, long timescale,
+                                                 long presentationTimeOffset, long periodDurationMs, int startNumber, long duration,
+                                                 List<SegmentTimelineElement> timeline, UrlTemplate initializationTemplate,
+                                                 UrlTemplate mediaTemplate, String baseUrl) {
+    return new SegmentTemplate(initialization, timescale, presentationTimeOffset, periodDurationMs,
+        startNumber, duration, timeline, initializationTemplate, mediaTemplate, baseUrl);
+  }
+
+  protected static UrlTemplate parseUrlTemplate(XmlPullParser xpp, String name,
+                                         UrlTemplate defaultValue) {
+    String valueString = xpp.getAttributeValue(null, name);
+    if (valueString != null) {
+      return UrlTemplate.compile(valueString);
+    }
+    return defaultValue;
+  }
 }
