@@ -15,13 +15,13 @@
  */
 package com.google.android.exoplayer.text;
 
-import com.google.android.exoplayer.SampleHolder;
-import com.google.android.exoplayer.util.Assertions;
-
 import android.media.MediaCodec;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+
+import com.google.android.exoplayer.SampleHolder;
+import com.google.android.exoplayer.util.Assertions;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

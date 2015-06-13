@@ -15,16 +15,16 @@
  */
 package com.google.android.exoplayer.text.subrip;
 
+import android.text.Html;
+import android.text.Spanned;
+import android.text.TextUtils;
+
 import com.google.android.exoplayer.C;
 import com.google.android.exoplayer.ParserException;
 import com.google.android.exoplayer.text.Cue;
 import com.google.android.exoplayer.text.SubtitleParser;
 import com.google.android.exoplayer.util.LongArray;
 import com.google.android.exoplayer.util.MimeTypes;
-
-import android.text.Html;
-import android.text.Spanned;
-import android.text.TextUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

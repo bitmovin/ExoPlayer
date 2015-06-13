@@ -15,10 +15,10 @@
  */
 package com.google.android.exoplayer.util;
 
+import android.media.AudioFormat;
+
 import com.google.android.exoplayer.C;
 import com.google.android.exoplayer.audio.AudioCapabilities;
-
-import android.media.AudioFormat;
 
 /**
  * Defines common MIME types and helper methods.

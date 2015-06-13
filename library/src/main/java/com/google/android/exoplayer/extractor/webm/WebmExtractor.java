@@ -15,6 +15,8 @@
  */
 package com.google.android.exoplayer.extractor.webm;
 
+import android.util.Pair;
+
 import com.google.android.exoplayer.C;
 import com.google.android.exoplayer.MediaFormat;
 import com.google.android.exoplayer.ParserException;
@@ -30,8 +32,6 @@ import com.google.android.exoplayer.util.LongArray;
 import com.google.android.exoplayer.util.MimeTypes;
 import com.google.android.exoplayer.util.NalUnitUtil;
 import com.google.android.exoplayer.util.ParsableByteArray;
-
-import android.util.Pair;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

@@ -15,6 +15,11 @@
  */
 package com.google.android.exoplayer;
 
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.media.MediaExtractor;
+import android.net.Uri;
+
 import com.google.android.exoplayer.SampleSource.SampleSourceReader;
 import com.google.android.exoplayer.drm.DrmInitData;
 import com.google.android.exoplayer.extractor.ExtractorSampleSource;
@@ -22,11 +27,6 @@ import com.google.android.exoplayer.extractor.mp4.Mp4Extractor;
 import com.google.android.exoplayer.util.Assertions;
 import com.google.android.exoplayer.util.MimeTypes;
 import com.google.android.exoplayer.util.Util;
-
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.media.MediaExtractor;
-import android.net.Uri;
 
 import java.io.FileDescriptor;
 import java.io.IOException;

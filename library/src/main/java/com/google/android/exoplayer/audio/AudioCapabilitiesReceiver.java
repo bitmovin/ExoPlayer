@@ -15,9 +15,6 @@
  */
 package com.google.android.exoplayer.audio;
 
-import com.google.android.exoplayer.util.Assertions;
-import com.google.android.exoplayer.util.Util;
-
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -25,6 +22,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioFormat;
 import android.media.AudioManager;
+
+import com.google.android.exoplayer.util.Assertions;
+import com.google.android.exoplayer.util.Util;
 
 /**
  * Notifies a listener when the audio playback capabilities change. Call {@link #register} to start

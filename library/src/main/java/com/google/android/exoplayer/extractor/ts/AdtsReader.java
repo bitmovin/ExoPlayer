@@ -15,6 +15,8 @@
  */
 package com.google.android.exoplayer.extractor.ts;
 
+import android.util.Pair;
+
 import com.google.android.exoplayer.C;
 import com.google.android.exoplayer.MediaFormat;
 import com.google.android.exoplayer.extractor.TrackOutput;
@@ -22,8 +24,6 @@ import com.google.android.exoplayer.util.CodecSpecificDataUtil;
 import com.google.android.exoplayer.util.MimeTypes;
 import com.google.android.exoplayer.util.ParsableBitArray;
 import com.google.android.exoplayer.util.ParsableByteArray;
-
-import android.util.Pair;
 
 import java.util.Collections;
 

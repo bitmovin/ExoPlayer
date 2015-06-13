@@ -15,6 +15,8 @@
  */
 package com.google.android.exoplayer.dash.mpd;
 
+import android.os.SystemClock;
+
 import com.google.android.exoplayer.ParserException;
 import com.google.android.exoplayer.upstream.Loader;
 import com.google.android.exoplayer.upstream.Loader.Loadable;
@@ -22,8 +24,6 @@ import com.google.android.exoplayer.upstream.UriDataSource;
 import com.google.android.exoplayer.upstream.UriLoadable;
 import com.google.android.exoplayer.util.Assertions;
 import com.google.android.exoplayer.util.Util;
-
-import android.os.SystemClock;
 
 import java.io.BufferedReader;
 import java.io.IOException;

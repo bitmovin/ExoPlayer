@@ -15,9 +15,9 @@
  */
 package com.google.android.exoplayer.text.webvtt;
 
-import com.google.android.exoplayer.text.Cue;
-
 import android.text.Layout.Alignment;
+
+import com.google.android.exoplayer.text.Cue;
 
 /**
  * A representation of a WebVTT cue.

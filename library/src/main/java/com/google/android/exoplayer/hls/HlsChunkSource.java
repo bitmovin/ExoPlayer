@@ -15,6 +15,11 @@
  */
 package com.google.android.exoplayer.hls;
 
+import android.net.Uri;
+import android.os.SystemClock;
+import android.text.TextUtils;
+import android.util.Log;
+
 import com.google.android.exoplayer.C;
 import com.google.android.exoplayer.MediaFormat;
 import com.google.android.exoplayer.audio.AudioCapabilities;
@@ -32,11 +37,6 @@ import com.google.android.exoplayer.upstream.HttpDataSource.InvalidResponseCodeE
 import com.google.android.exoplayer.util.Assertions;
 import com.google.android.exoplayer.util.UriUtil;
 import com.google.android.exoplayer.util.Util;
-
-import android.net.Uri;
-import android.os.SystemClock;
-import android.text.TextUtils;
-import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

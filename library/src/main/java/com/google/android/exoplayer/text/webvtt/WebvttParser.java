@@ -15,15 +15,15 @@
  */
 package com.google.android.exoplayer.text.webvtt;
 
+import android.text.Html;
+import android.text.Layout.Alignment;
+import android.util.Log;
+
 import com.google.android.exoplayer.C;
 import com.google.android.exoplayer.ParserException;
 import com.google.android.exoplayer.text.Cue;
 import com.google.android.exoplayer.text.SubtitleParser;
 import com.google.android.exoplayer.util.MimeTypes;
-
-import android.text.Html;
-import android.text.Layout.Alignment;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;

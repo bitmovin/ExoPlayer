@@ -15,6 +15,8 @@
  */
 package com.google.android.exoplayer.hls;
 
+import android.util.SparseArray;
+
 import com.google.android.exoplayer.MediaFormat;
 import com.google.android.exoplayer.SampleHolder;
 import com.google.android.exoplayer.chunk.Format;
@@ -27,8 +29,6 @@ import com.google.android.exoplayer.extractor.SeekMap;
 import com.google.android.exoplayer.extractor.TrackOutput;
 import com.google.android.exoplayer.upstream.Allocator;
 import com.google.android.exoplayer.util.Assertions;
-
-import android.util.SparseArray;
 
 import java.io.IOException;
 

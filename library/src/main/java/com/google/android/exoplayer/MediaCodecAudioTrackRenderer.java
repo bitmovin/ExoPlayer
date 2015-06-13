@@ -15,15 +15,15 @@
  */
 package com.google.android.exoplayer;
 
-import com.google.android.exoplayer.MediaCodecUtil.DecoderQueryException;
-import com.google.android.exoplayer.audio.AudioTrack;
-import com.google.android.exoplayer.drm.DrmSessionManager;
-import com.google.android.exoplayer.util.MimeTypes;
-
 import android.annotation.TargetApi;
 import android.media.MediaCodec;
 import android.media.audiofx.Virtualizer;
 import android.os.Handler;
+
+import com.google.android.exoplayer.audio.AudioTrack;
+import com.google.android.exoplayer.drm.DrmSessionManager;
+import com.google.android.exoplayer.exceptions.DecoderQueryException;
+import com.google.android.exoplayer.util.MimeTypes;
 
 import java.nio.ByteBuffer;
 

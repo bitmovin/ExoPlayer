@@ -15,12 +15,12 @@
  */
 package com.google.android.exoplayer.upstream;
 
-import com.google.android.exoplayer.C;
-import com.google.android.exoplayer.util.Assertions;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
+
+import com.google.android.exoplayer.C;
+import com.google.android.exoplayer.util.Assertions;
 
 import java.io.EOFException;
 import java.io.FileInputStream;

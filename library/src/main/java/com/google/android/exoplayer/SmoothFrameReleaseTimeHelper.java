@@ -15,11 +15,11 @@
  */
 package com.google.android.exoplayer;
 
-import com.google.android.exoplayer.MediaCodecVideoTrackRenderer.FrameReleaseTimeHelper;
-
 import android.annotation.TargetApi;
 import android.view.Choreographer;
 import android.view.Choreographer.FrameCallback;
+
+import com.google.android.exoplayer.MediaCodecVideoTrackRenderer.FrameReleaseTimeHelper;
 
 /**
  * Makes a best effort to adjust frame release timestamps for a smoother visual result.

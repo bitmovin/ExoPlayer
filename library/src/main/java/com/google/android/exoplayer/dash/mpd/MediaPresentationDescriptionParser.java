@@ -15,6 +15,9 @@
  */
 package com.google.android.exoplayer.dash.mpd;
 
+import android.text.TextUtils;
+import android.util.Base64;
+
 import com.google.android.exoplayer.ParserException;
 import com.google.android.exoplayer.chunk.Format;
 import com.google.android.exoplayer.dash.mpd.SegmentBase.SegmentList;
@@ -27,9 +30,6 @@ import com.google.android.exoplayer.util.MimeTypes;
 import com.google.android.exoplayer.util.ParsableByteArray;
 import com.google.android.exoplayer.util.UriUtil;
 import com.google.android.exoplayer.util.Util;
-
-import android.text.TextUtils;
-import android.util.Base64;
 
 import org.xml.sax.helpers.DefaultHandler;
 import org.xmlpull.v1.XmlPullParser;

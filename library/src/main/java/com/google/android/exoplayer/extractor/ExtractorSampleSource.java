@@ -15,6 +15,10 @@
  */
 package com.google.android.exoplayer.extractor;
 
+import android.net.Uri;
+import android.os.SystemClock;
+import android.util.SparseArray;
+
 import com.google.android.exoplayer.C;
 import com.google.android.exoplayer.MediaFormat;
 import com.google.android.exoplayer.MediaFormatHolder;
@@ -31,10 +35,6 @@ import com.google.android.exoplayer.upstream.DefaultAllocator;
 import com.google.android.exoplayer.upstream.Loader;
 import com.google.android.exoplayer.upstream.Loader.Loadable;
 import com.google.android.exoplayer.util.Assertions;
-
-import android.net.Uri;
-import android.os.SystemClock;
-import android.util.SparseArray;
 
 import java.io.IOException;
 

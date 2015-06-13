@@ -15,10 +15,10 @@
  */
 package com.google.android.exoplayer;
 
-import com.google.android.exoplayer.util.Util;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+
+import com.google.android.exoplayer.util.Util;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;

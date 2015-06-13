@@ -15,8 +15,6 @@
  */
 package com.google.android.exoplayer.text;
 
-import com.google.android.exoplayer.util.Util;
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
@@ -34,6 +32,8 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
+
+import com.google.android.exoplayer.util.Util;
 
 /**
  * A view for rendering a single caption.

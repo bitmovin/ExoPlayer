@@ -15,6 +15,8 @@
  */
 package com.google.android.exoplayer.chunk;
 
+import android.util.Log;
+
 import com.google.android.exoplayer.MediaFormat;
 import com.google.android.exoplayer.chunk.ChunkExtractorWrapper.SingleTrackOutput;
 import com.google.android.exoplayer.drm.DrmInitData;
@@ -26,8 +28,6 @@ import com.google.android.exoplayer.upstream.DataSource;
 import com.google.android.exoplayer.upstream.DataSpec;
 import com.google.android.exoplayer.util.ParsableByteArray;
 import com.google.android.exoplayer.util.Util;
-
-import android.util.Log;
 
 import java.io.IOException;
 

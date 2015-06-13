@@ -16,8 +16,8 @@
 package com.google.android.exoplayer.demo;
 
 import com.google.android.exoplayer.MediaCodecUtil;
-import com.google.android.exoplayer.MediaCodecUtil.DecoderQueryException;
 import com.google.android.exoplayer.demo.Samples.Sample;
+import com.google.android.exoplayer.exceptions.DecoderQueryException;
 import com.google.android.exoplayer.util.MimeTypes;
 
 import android.app.Activity;

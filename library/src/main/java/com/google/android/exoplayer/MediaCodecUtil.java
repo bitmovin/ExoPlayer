@@ -15,10 +15,6 @@
  */
 package com.google.android.exoplayer;
 
-import com.google.android.exoplayer.util.Assertions;
-import com.google.android.exoplayer.util.MimeTypes;
-import com.google.android.exoplayer.util.Util;
-
 import android.annotation.TargetApi;
 import android.media.MediaCodecInfo;
 import android.media.MediaCodecInfo.CodecCapabilities;
@@ -28,6 +24,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 
+import com.google.android.exoplayer.exceptions.DecoderQueryException;
+import com.google.android.exoplayer.util.Assertions;
+import com.google.android.exoplayer.util.MimeTypes;
+import com.google.android.exoplayer.util.Util;
+
 import java.util.HashMap;
 
 /**
@@ -35,21 +36,6 @@ import java.util.HashMap;
  */
 @TargetApi(16)
 public class MediaCodecUtil {
-
-  /**
-   * Thrown when an error occurs querying the device for its underlying media capabilities.
-   * <p>
-   * Such failures are not expected in normal operation and are normally temporary (e.g. if the
-   * mediaserver process has crashed and is yet to restart).
-   */
-  public static class DecoderQueryException extends Exception {
-
-    private DecoderQueryException(Throwable cause) {
-      super("Failed to query underlying media codecs", cause);
-    }
-
-  }
-
   private static final String TAG = "MediaCodecUtil";
 
   private static final HashMap<CodecKey, Pair<String, CodecCapabilities>> codecs = new HashMap<>();

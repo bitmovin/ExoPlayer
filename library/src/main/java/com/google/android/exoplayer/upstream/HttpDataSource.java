@@ -15,10 +15,10 @@
  */
 package com.google.android.exoplayer.upstream;
 
+import android.text.TextUtils;
+
 import com.google.android.exoplayer.util.Predicate;
 import com.google.android.exoplayer.util.Util;
-
-import android.text.TextUtils;
 
 import java.io.IOException;
 import java.util.List;

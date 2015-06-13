@@ -15,6 +15,10 @@
  */
 package com.google.android.exoplayer.extractor.ts;
 
+import android.util.Log;
+import android.util.SparseArray;
+import android.util.SparseBooleanArray;
+
 import com.google.android.exoplayer.C;
 import com.google.android.exoplayer.audio.AudioCapabilities;
 import com.google.android.exoplayer.extractor.Extractor;
@@ -24,10 +28,6 @@ import com.google.android.exoplayer.extractor.PositionHolder;
 import com.google.android.exoplayer.extractor.SeekMap;
 import com.google.android.exoplayer.util.ParsableBitArray;
 import com.google.android.exoplayer.util.ParsableByteArray;
-
-import android.util.Log;
-import android.util.SparseArray;
-import android.util.SparseBooleanArray;
 
 import java.io.IOException;
 
