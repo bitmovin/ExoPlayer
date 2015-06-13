@@ -30,6 +30,8 @@ import com.google.android.exoplayer.chunk.ChunkSampleSource;
 import com.google.android.exoplayer.chunk.Format;
 import com.google.android.exoplayer.chunk.MultiTrackChunkSource;
 import com.google.android.exoplayer.drm.StreamingDrmSessionManager;
+import com.google.android.exoplayer.exceptions.InitializationException;
+import com.google.android.exoplayer.exceptions.WriteException;
 import com.google.android.exoplayer.hls.HlsSampleSource;
 import com.google.android.exoplayer.metadata.MetadataTrackRenderer.MetadataRenderer;
 import com.google.android.exoplayer.text.Cue;
@@ -120,8 +122,8 @@ public class DemoPlayer implements ExoPlayer.Listener, ChunkSampleSource.EventLi
    */
   public interface InternalErrorListener {
     void onRendererInitializationError(Exception e);
-    void onAudioTrackInitializationError(AudioTrack.InitializationException e);
-    void onAudioTrackWriteError(AudioTrack.WriteException e);
+    void onAudioTrackInitializationError(InitializationException e);
+    void onAudioTrackWriteError(WriteException e);
     void onDecoderInitializationError(DecoderInitializationException e);
     void onCryptoError(CryptoException e);
     void onLoadError(int sourceId, IOException e);
@@ -498,14 +500,14 @@ public class DemoPlayer implements ExoPlayer.Listener, ChunkSampleSource.EventLi
   }
 
   @Override
-  public void onAudioTrackInitializationError(AudioTrack.InitializationException e) {
+  public void onAudioTrackInitializationError(InitializationException e) {
     if (internalErrorListener != null) {
       internalErrorListener.onAudioTrackInitializationError(e);
     }
   }
 
   @Override
-  public void onAudioTrackWriteError(AudioTrack.WriteException e) {
+  public void onAudioTrackWriteError(WriteException e) {
     if (internalErrorListener != null) {
       internalErrorListener.onAudioTrackWriteError(e);
     }

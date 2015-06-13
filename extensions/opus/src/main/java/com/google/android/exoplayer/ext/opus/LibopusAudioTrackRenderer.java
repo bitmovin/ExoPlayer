@@ -23,6 +23,8 @@ import com.google.android.exoplayer.SampleSource;
 import com.google.android.exoplayer.SampleSource.SampleSourceReader;
 import com.google.android.exoplayer.TrackRenderer;
 import com.google.android.exoplayer.audio.AudioTrack;
+import com.google.android.exoplayer.exceptions.InitializationException;
+import com.google.android.exoplayer.exceptions.WriteException;
 import com.google.android.exoplayer.ext.opus.OpusDecoderWrapper.InputBuffer;
 import com.google.android.exoplayer.ext.opus.OpusDecoderWrapper.OutputBuffer;
 import com.google.android.exoplayer.util.MimeTypes;
@@ -50,14 +52,14 @@ public class LibopusAudioTrackRenderer extends TrackRenderer {
      *
      * @param e The corresponding exception.
      */
-    void onAudioTrackInitializationError(AudioTrack.InitializationException e);
+    void onAudioTrackInitializationError(InitializationException e);
 
     /**
      * Invoked when an {@link AudioTrack} write fails.
      *
      * @param e The corresponding exception.
      */
-    void onAudioTrackWriteError(AudioTrack.WriteException e);
+    void onAudioTrackWriteError(WriteException e);
 
     /**
      * Invoked when decoding fails.
@@ -186,10 +188,10 @@ public class LibopusAudioTrackRenderer extends TrackRenderer {
         // Queue input buffers.
         while (feedInputBuffer()) {}
       }
-    } catch (AudioTrack.InitializationException e) {
+    } catch (InitializationException e) {
       notifyAudioTrackInitializationError(e);
       throw new ExoPlaybackException(e);
-    } catch (AudioTrack.WriteException e) {
+    } catch (WriteException e) {
       notifyAudioTrackWriteError(e);
       throw new ExoPlaybackException(e);
     } catch (OpusDecoderException e) {
@@ -200,8 +202,7 @@ public class LibopusAudioTrackRenderer extends TrackRenderer {
     }
   }
 
-  private void renderBuffer() throws OpusDecoderException, AudioTrack.InitializationException,
-      AudioTrack.WriteException {
+  private void renderBuffer() throws OpusDecoderException, InitializationException, WriteException {
     if (outputStreamEnded) {
       return;
     }
@@ -407,7 +408,7 @@ public class LibopusAudioTrackRenderer extends TrackRenderer {
     }
   }
 
-  private void notifyAudioTrackInitializationError(final AudioTrack.InitializationException e) {
+  private void notifyAudioTrackInitializationError(final InitializationException e) {
     if (eventHandler != null && eventListener != null) {
       eventHandler.post(new Runnable()  {
         @Override
@@ -418,7 +419,7 @@ public class LibopusAudioTrackRenderer extends TrackRenderer {
     }
   }
 
-  private void notifyAudioTrackWriteError(final AudioTrack.WriteException e) {
+  private void notifyAudioTrackWriteError(final WriteException e) {
     if (eventHandler != null && eventListener != null) {
       eventHandler.post(new Runnable()  {
         @Override
