@@ -24,6 +24,7 @@ import android.os.ConditionVariable;
 import android.util.Log;
 
 import com.google.android.exoplayer.C;
+import com.google.android.exoplayer.exceptions.InitializationException;
 import com.google.android.exoplayer.util.Ac3Util;
 import com.google.android.exoplayer.util.Assertions;
 import com.google.android.exoplayer.util.MimeTypes;
@@ -51,24 +52,6 @@ import java.nio.ByteBuffer;
  */
 @TargetApi(16)
 public final class AudioTrack {
-
-  /**
-   * Thrown when a failure occurs instantiating an {@link android.media.AudioTrack}.
-   */
-  public static final class InitializationException extends Exception {
-
-    /** The state as reported by {@link android.media.AudioTrack#getState()}. */
-    public final int audioTrackState;
-
-    public InitializationException(
-        int audioTrackState, int sampleRate, int channelConfig, int bufferSize) {
-      super("AudioTrack init failed: " + audioTrackState + ", Config(" + sampleRate + ", "
-          + channelConfig + ", " + bufferSize + ")");
-      this.audioTrackState = audioTrackState;
-    }
-
-  }
-
   /**
    * Thrown when a failure occurs writing to an {@link android.media.AudioTrack}.
    */

@@ -24,6 +24,7 @@ import com.google.android.exoplayer.audio.AudioTrack;
 import com.google.android.exoplayer.drm.DrmSessionManager;
 import com.google.android.exoplayer.exceptions.DecoderQueryException;
 import com.google.android.exoplayer.exceptions.ExoPlaybackException;
+import com.google.android.exoplayer.exceptions.InitializationException;
 import com.google.android.exoplayer.util.MimeTypes;
 
 import java.nio.ByteBuffer;
@@ -45,7 +46,7 @@ public class MediaCodecAudioTrackRenderer extends MediaCodecTrackRenderer {
      *
      * @param e The corresponding exception.
      */
-    void onAudioTrackInitializationError(AudioTrack.InitializationException e);
+    void onAudioTrackInitializationError(InitializationException e);
 
     /**
      * Invoked when an {@link AudioTrack} write fails.
@@ -270,7 +271,7 @@ public class MediaCodecAudioTrackRenderer extends MediaCodecTrackRenderer {
           audioSessionId = audioTrack.initialize();
           onAudioSessionId(audioSessionId);
         }
-      } catch (AudioTrack.InitializationException e) {
+      } catch (InitializationException e) {
         notifyAudioTrackInitializationError(e);
         throw new ExoPlaybackException(e);
       }
@@ -313,7 +314,7 @@ public class MediaCodecAudioTrackRenderer extends MediaCodecTrackRenderer {
     }
   }
 
-  private void notifyAudioTrackInitializationError(final AudioTrack.InitializationException e) {
+  private void notifyAudioTrackInitializationError(final InitializationException e) {
     if (eventHandler != null && eventListener != null) {
       eventHandler.post(new Runnable()  {
         @Override
