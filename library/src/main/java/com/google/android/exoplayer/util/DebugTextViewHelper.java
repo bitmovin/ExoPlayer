@@ -25,44 +25,16 @@ import android.widget.TextView;
  * A helper class for periodically updating debug information displayed by a {@link TextView}.
  */
 public final class DebugTextViewHelper implements Runnable {
-
-  /**
-   * Provides debug information about an ongoing playback.
-   */
-  public interface Provider {
-
-    /**
-     * Returns the current playback position, in milliseconds.
-     */
-    long getCurrentPosition();
-
-    /**
-     * Returns a format whose information should be displayed, or null.
-     */
-    Format getFormat();
-
-    /**
-     * Returns a {@link BandwidthMeter} whose estimate should be displayed, or null.
-     */
-    BandwidthMeter getBandwidthMeter();
-
-    /**
-     * Returns a {@link CodecCounters} whose information should be displayed, or null.
-     */
-    CodecCounters getCodecCounters();
-
-  }
-
   private static final int REFRESH_INTERVAL_MS = 1000;
 
   private final TextView textView;
-  private final Provider debuggable;
+  private final IProvider debuggable;
 
   /**
-   * @param debuggable The {@link Provider} from which debug information should be obtained.
+   * @param debuggable The {@link com.google.android.exoplayer.util.DebugTextViewHelper.IProvider} from which debug information should be obtained.
    * @param textView The {@link TextView} that should be updated to display the information.
    */
-  public DebugTextViewHelper(Provider debuggable, TextView textView) {
+  public DebugTextViewHelper(IProvider debuggable, TextView textView) {
     this.debuggable = debuggable;
     this.textView = textView;
   }

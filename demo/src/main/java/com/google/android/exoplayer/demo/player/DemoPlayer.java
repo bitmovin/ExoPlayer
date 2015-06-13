@@ -37,6 +37,7 @@ import com.google.android.exoplayer.text.TextRenderer;
 import com.google.android.exoplayer.upstream.BandwidthMeter;
 import com.google.android.exoplayer.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer.util.DebugTextViewHelper;
+import com.google.android.exoplayer.util.IProvider;
 import com.google.android.exoplayer.util.PlayerControl;
 
 import android.media.MediaCodec.CryptoException;
@@ -59,7 +60,7 @@ public class DemoPlayer implements ExoPlayer.Listener, ChunkSampleSource.EventLi
     HlsSampleSource.EventListener, DefaultBandwidthMeter.EventListener,
     MediaCodecVideoTrackRenderer.EventListener, MediaCodecAudioTrackRenderer.EventListener,
     StreamingDrmSessionManager.EventListener, TextRenderer,
-    MetadataRenderer<Map<String, Object>>, DebugTextViewHelper.Provider {
+    MetadataRenderer<Map<String, Object>>, IProvider {
 
   /**
    * Builds renderers for the player.
