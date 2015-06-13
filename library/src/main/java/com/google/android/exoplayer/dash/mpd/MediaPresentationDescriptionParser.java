@@ -20,10 +20,6 @@ import android.util.Base64;
 
 import com.google.android.exoplayer.ParserException;
 import com.google.android.exoplayer.chunk.Format;
-import com.google.android.exoplayer.dash.mpd.SegmentBase.SegmentList;
-import com.google.android.exoplayer.dash.mpd.SegmentBase.SegmentTemplate;
-import com.google.android.exoplayer.dash.mpd.SegmentBase.SegmentTimelineElement;
-import com.google.android.exoplayer.dash.mpd.SegmentBase.SingleSegmentBase;
 import com.google.android.exoplayer.upstream.UriLoadable;
 import com.google.android.exoplayer.util.Assertions;
 import com.google.android.exoplayer.util.MimeTypes;

@@ -21,8 +21,6 @@ import com.google.android.exoplayer.chunk.Format;
 import com.google.android.exoplayer.chunk.FormatWrapper;
 import com.google.android.exoplayer.dash.DashSegmentIndex;
 import com.google.android.exoplayer.dash.DashSingleSegmentIndex;
-import com.google.android.exoplayer.dash.mpd.SegmentBase.MultiSegmentBase;
-import com.google.android.exoplayer.dash.mpd.SegmentBase.SingleSegmentBase;
 
 /**
  * A DASH representation.
