@@ -21,6 +21,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
+import com.google.android.exoplayer.exceptions.ExoPlaybackException;
+
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /**

@@ -15,7 +15,7 @@
  */
 package com.google.android.exoplayer.ext.opus;
 
-import com.google.android.exoplayer.ExoPlaybackException;
+import com.google.android.exoplayer.exceptions.ExoPlaybackException;
 import com.google.android.exoplayer.ExoPlayer;
 import com.google.android.exoplayer.MediaFormat;
 import com.google.android.exoplayer.MediaFormatHolder;

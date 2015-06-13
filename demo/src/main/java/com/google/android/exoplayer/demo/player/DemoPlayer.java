@@ -17,7 +17,7 @@ package com.google.android.exoplayer.demo.player;
 
 import com.google.android.exoplayer.CodecCounters;
 import com.google.android.exoplayer.DummyTrackRenderer;
-import com.google.android.exoplayer.ExoPlaybackException;
+import com.google.android.exoplayer.exceptions.ExoPlaybackException;
 import com.google.android.exoplayer.ExoPlayer;
 import com.google.android.exoplayer.MediaCodecAudioTrackRenderer;
 import com.google.android.exoplayer.MediaCodecTrackRenderer;
@@ -36,7 +36,6 @@ import com.google.android.exoplayer.text.Cue;
 import com.google.android.exoplayer.text.TextRenderer;
 import com.google.android.exoplayer.upstream.BandwidthMeter;
 import com.google.android.exoplayer.upstream.DefaultBandwidthMeter;
-import com.google.android.exoplayer.util.DebugTextViewHelper;
 import com.google.android.exoplayer.util.IProvider;
 import com.google.android.exoplayer.util.PlayerControl;
 

@@ -15,7 +15,7 @@
  */
 package com.google.android.exoplayer.demo.webm;
 
-import com.google.android.exoplayer.ExoPlaybackException;
+import com.google.android.exoplayer.exceptions.ExoPlaybackException;
 import com.google.android.exoplayer.ExoPlayer;
 import com.google.android.exoplayer.TrackRenderer;
 import com.google.android.exoplayer.VideoSurfaceView;

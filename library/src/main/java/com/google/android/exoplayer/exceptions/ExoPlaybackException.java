@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.android.exoplayer;
+package com.google.android.exoplayer.exceptions;
 
 /**
  * Thrown when a non-recoverable playback failure occurs.

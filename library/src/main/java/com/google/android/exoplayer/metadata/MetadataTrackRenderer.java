@@ -20,7 +20,7 @@ import android.os.Handler.Callback;
 import android.os.Looper;
 import android.os.Message;
 
-import com.google.android.exoplayer.ExoPlaybackException;
+import com.google.android.exoplayer.exceptions.ExoPlaybackException;
 import com.google.android.exoplayer.MediaFormatHolder;
 import com.google.android.exoplayer.SampleHolder;
 import com.google.android.exoplayer.SampleSource;

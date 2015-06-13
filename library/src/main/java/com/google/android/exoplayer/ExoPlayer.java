@@ -17,6 +17,8 @@ package com.google.android.exoplayer;
 
 import android.os.Looper;
 
+import com.google.android.exoplayer.exceptions.ExoPlaybackException;
+
 /**
  * An extensible media player exposing traditional high-level media player functionality, such as
  * the ability to prepare, play, pause and seek.

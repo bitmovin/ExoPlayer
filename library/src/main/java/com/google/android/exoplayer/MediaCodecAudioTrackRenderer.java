@@ -23,6 +23,7 @@ import android.os.Handler;
 import com.google.android.exoplayer.audio.AudioTrack;
 import com.google.android.exoplayer.drm.DrmSessionManager;
 import com.google.android.exoplayer.exceptions.DecoderQueryException;
+import com.google.android.exoplayer.exceptions.ExoPlaybackException;
 import com.google.android.exoplayer.util.MimeTypes;
 
 import java.nio.ByteBuffer;

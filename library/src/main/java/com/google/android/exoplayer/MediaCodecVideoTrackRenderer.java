@@ -23,6 +23,7 @@ import android.os.SystemClock;
 import android.view.Surface;
 
 import com.google.android.exoplayer.drm.DrmSessionManager;
+import com.google.android.exoplayer.exceptions.ExoPlaybackException;
 import com.google.android.exoplayer.util.MimeTypes;
 import com.google.android.exoplayer.util.TraceUtil;
 import com.google.android.exoplayer.util.Util;

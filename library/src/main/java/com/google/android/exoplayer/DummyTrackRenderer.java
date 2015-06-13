@@ -15,6 +15,8 @@
  */
 package com.google.android.exoplayer;
 
+import com.google.android.exoplayer.exceptions.ExoPlaybackException;
+
 /**
  * A {@link TrackRenderer} that does nothing.
  * <p>

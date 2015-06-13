@@ -25,6 +25,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.google.android.exoplayer.ExoPlayer.ExoPlayerComponent;
+import com.google.android.exoplayer.exceptions.ExoPlaybackException;
 import com.google.android.exoplayer.util.Assertions;
 import com.google.android.exoplayer.util.PriorityHandlerThread;
 import com.google.android.exoplayer.util.TraceUtil;
