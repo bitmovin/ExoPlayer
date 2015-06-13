@@ -25,6 +25,7 @@ import android.util.Log;
 
 import com.google.android.exoplayer.C;
 import com.google.android.exoplayer.exceptions.InitializationException;
+import com.google.android.exoplayer.exceptions.WriteException;
 import com.google.android.exoplayer.util.Ac3Util;
 import com.google.android.exoplayer.util.Assertions;
 import com.google.android.exoplayer.util.MimeTypes;
@@ -52,21 +53,6 @@ import java.nio.ByteBuffer;
  */
 @TargetApi(16)
 public final class AudioTrack {
-  /**
-   * Thrown when a failure occurs writing to an {@link android.media.AudioTrack}.
-   */
-  public static final class WriteException extends Exception {
-
-    /** The value returned from {@link android.media.AudioTrack#write(byte[], int, int)}. */
-    public final int errorCode;
-
-    public WriteException(int errorCode) {
-      super("AudioTrack write failed: " + errorCode);
-      this.errorCode = errorCode;
-    }
-
-  }
-
   /**
    * Thrown when {@link android.media.AudioTrack#getTimestamp} returns a spurious timestamp, if
    * {@code AudioTrack#failOnSpuriousAudioTimestamp} is set.
